@@ -7,18 +7,20 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
     boy = new QPerson("小帅");
-    boy->setProperty("socre", 95);
+    boy->setProperty("score", 95);
     boy->setProperty("age", 10);
     boy->setProperty("sex", "Male");//动态属性
     connect(boy, &QPerson::ageChanged, this, &Widget::on_ageChanged);
 
     girl = new QPerson("小樱");
-    girl->setProperty("socre", 99);
+    girl->setProperty("score", 99);
     girl->setProperty("age", 12);
-    boy->setProperty("sex", "Fmale");
+    girl->setProperty("sex", "Fmale");
     connect(girl, &QPerson::ageChanged, this, &Widget::on_ageChanged);
     ui->spinBoxBoy->setProperty("isBoy", true); //动态属性
     ui->spinBoxGirl->setProperty("isBoy", false); //动态属性
+    ui->spinBoxGirl->setValue(girl->property("age").toInt());
+    ui->spinBoxBoy->setValue(boy->property("age").toInt());
 
     connect(ui->spinBoxBoy, SIGNAL(valueChanged(int)),
             this, SLOT(on_spin_valueChanged(int)));
